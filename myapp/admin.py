@@ -6,6 +6,7 @@
 # admin.site.register(Registers) #table registe
 
 from django.contrib import admin
-from .models import Registers  # Ensure that this line is correct
+from .models import Registers , Organization # Ensure that this line is correct
 
 admin.site.register(Registers)
+admin.site.register(Organization)

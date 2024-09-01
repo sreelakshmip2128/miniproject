@@ -10,7 +10,8 @@ urlpatterns = [
     path('userlogin/', views.user_login, name='userlogin'),
     path('orglogin/', views.org_login, name='orglogin'),
     path('userreg/', views.register, name='userreg'),
-    path('orgreg/', views.org_reg, name='orgreg'),
+    # path('orgreg/', views.org_reg, name='orgreg'),
+     path('orgreg/', views.org_reg, name='orgreg'),
 # new
     # path('organization/dashboard/', views.organization_dashboard, name='organization_dashboard'),
     # path('user/dashboard/', views.user_dashboard, name='user_dashboard'),

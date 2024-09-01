@@ -51,17 +51,23 @@
 
 from django.db import models
 
-# Create your models here.
+
+class Organization(models.Model):
+    org_name = models.CharField(max_length=255)
+    org_email = models.EmailField(unique=True)
+    org_password = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.org_name
+
 class Registers(models.Model):
-    username = models.CharField(max_length=100)
-    # lname = models.CharField(max_length=100)
-    
-    # phone = models.IntegerField()
-    email = models.EmailField()
+    username = models.CharField(max_length=100, unique=True)
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
     confirmpassword = models.CharField(max_length=50)
 
-    def _str_(self):
+    def __str__(self):
         return self.username
+
     
     
