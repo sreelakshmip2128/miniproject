@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  {% block styles %}
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  {% endblock %}
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Dashboard</h2>
+    <h3>Your Campaigns</h3>
+    <ul>
+      {% for campaign in campaigns %}
+        <li>{{ campaign.title }} - {{ campaign.current_amount }} / {{ campaign.goal_amount }}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Create a New Campaign</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ campaign_form.as_p }}
+      <button type="submit" class="btn btn-primary">Create Campaign</button>
+    </form>
+
+    <h3>Donate to a Campaign</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ donation_form.as_p }}
+      <button type="submit" class="btn btn-success">Donate</button>
+    </form>
+
+    <h3>Request Campaign Verification</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ verification_form.as_p }}
+      <button type="submit" class="btn btn-warning">Request Verification</button>
+    </form>
+  </div>
+  {% block scripts %}
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  {% endblock %}
+</body>
+</html>

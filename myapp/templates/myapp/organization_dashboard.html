@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organization Dashboard</title>
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Welcome, {{ organization.name }}</h2>
+    <h3 class="mt-5">Pending Verification Requests</h3>
+    {% for request in verification_requests %}
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ request.campaign.title }}</h5>
+          <p class="card-text">{{ request.campaign.description }}</p>
+          <p>Requested by: {{ request.requested_by.username }}</p>
+          <form method="post" action="{% url 'approve_request' request.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Approve</button>
+          </form>
+          <form method="post" action="{% url 'reject_request' request.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger mt-2">Reject</button>
+          </form>
+        </div>
+      </div>
+    {% empty %}
+      <p>No pending verification requests.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>
