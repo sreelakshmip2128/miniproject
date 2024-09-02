@@ -7,6 +7,14 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
+from django.contrib.auth import authenticate, login
+
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def dashboard(request):
+    return render(request, 'myapp/dashboard.html')
 
 
 def user_login(request):
@@ -48,6 +56,20 @@ def register(request):
 
     return render(request, "myapp/userreg.html")
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            return render(request, 'myapp/dashboard.html', {'error': 'Invalid credentials'})
+
+    return render(request, 'myapp/dashboard.html')
+
 def org_reg(request):
     if request.method == "POST":
         org_name = request.POST.get('org_name')
@@ -77,6 +99,9 @@ def org_reg(request):
         return redirect("orglogin")  # Redirect to the organization login page
 
     return render(request, "myapp/orgreg.html")
+
+
+
 
 
 def org_reg(request):
