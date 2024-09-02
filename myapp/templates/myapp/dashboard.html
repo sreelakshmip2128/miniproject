@@ -1,43 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard | HopeScope</title>
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    {% block styles %}
+<head>
+ {% load static %}
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Campaign2</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  
+  <link href="{% static 'img/favicon.png' %}" rel="icon">
+<link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+<!-- Main CSS File -->
+{% block styles %}
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
 {% endblock %}
+  <!-- =======================================================
+  * Template Name: Selecao
+  * Template URL: https://bootstrapmade.com/selecao-bootstrap-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
-<body>
- 
-  <div class="container mt-5">
-      <div class="row">
-          <div class="col-lg-12">
-              <div class="card">
-                  <div class="card-body text-center">
-                      <h1 class="card-title">Welcome</h1>
-                      <p class="card-text">We're glad to have you here. Explore your campaigns, donations, and more from the menu above.</p>
-                  </div>
-              </div>
-          </div>
+
+<body class="service-details-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'index' %}" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">HOPESCOPE</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <!-- <li><a href="#hero" class="active">Home</a></li> -->
+          <!-- <li><a href="#about">About</a></li> -->
+          <!-- <li><a href="#services">Services</a></li> -->
+          <!-- <li><a href="#portfolio">Portfolio</a></li>
+           <li><a href="#team">Team</a></li>  -->
+          <!-- <li><a href="blog.html">Blog</a></li> -->
+          <li class="dropdown"><a href="#"><span>Categories</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Charity</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">User</a></li>
+                  <li><a href="#">Startups</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Volunteering</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li> -->
+              <li><a href="#">Starups</a></li>
+              <li><a href="#">Campaigns</a></li>
+              <li><a href="#">Events</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+             
+              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">User</a></li>
+                  <li><a href="#">Startups</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Volunteering</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li> -->
+              <li><a href="{% url 'userreg' %}">As User</a></li>
+              <li><a href="{% url 'orgreg' %}">As Organization</a></li>
+              
+            </ul>
+            </li>
+          <li class="dropdown"><a href="#"><span>Logins</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="{% url 'userlogin' %}">User Login</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">User</a></li>
+                  <li><a href="#">Startups</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Volunteering</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li> -->
+              <li><a href="{% url 'orglogin' %}">Organization Login</a></li>
+              <!-- <li><a href="#">Dropdown 3</a></li>
+              <li><a href="#">Dropdown 4</a></li> -->
+            </ul>
+          </li>
+          <!-- <li><a href="#contact">Contact</a></li> -->
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+      <div class="container position-relative">
+        <h1>Welcome User</h1>
+        <!-- <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p> -->
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li class="current">User</li>
+          </ol>
+        </nav>
       </div>
+    </div><!-- End Page Title -->
+
+    <!-- Progress Bar Section -->
+    <section id="progress-bar-section" class="progress-bar-section section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="progress-bar-wrapper">
+              <h4>Campaign Progress</h4>
+              <div class="progress">
+                <!-- Replace 70% with the actual percentage based on the amount raised -->
+                <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="7000" aria-valuemin="0" aria-valuemax="10000">₹7,000 / ₹10,000 (70%)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Progress Bar Section -->
+
+    <!-- Image and Description Section -->
+    <section id="image-description-section" class="image-description-section section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="{% static 'img/portfolio/charity.jpg' %}" alt="" class="img-fluid">
+
+          </div>
+          <div class="col-lg-6">
+            <h2>Personal Information</h2>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel urna sit amet arcu cursus suscipit. Aenean et sapien vitae nulla elementum laoreet. Morbi vel ligula quam. Nulla facilisi. Fusce feugiat augue sit amet orci varius, sed iaculis sem volutpat.</p> -->
+          </div>
+        </div>
+      </div>
+    </section><!-- End Image and Description Section -->
+
+    <!-- Demo Payment Option -->
+    <section id="payment-section" class="payment-section section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2>Make a Payment</h2>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+              <input type="hidden" name="cmd" value="_donations">
+              <input type="hidden" name="business" value="your-paypal-email@example.com">
+              <input type="hidden" name="currency_code" value="USD">
+              <input type="hidden" name="amount" value="10.00">
+              <button type="submit" class="btn btn-primary">Donate $10</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Demo Payment Option Section -->
+
+    <!-- Personal Information Section -->
+<section id="personal-info-section" class="personal-info-section section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Personal Information</h2>
+        <form action="#" method="post">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Update Information</button>
+        </form>
+      </div>
+    </div>
   </div>
+</section><!-- End Personal Information Section -->
 
-  <!-- Footer -->
-  <footer class="text-center mt-5 py-4">
-      <p>&copy; 2024 HopeScope. All Rights Reserved.</p>
-  </footer>
+<!-- Current Campaigns Section -->
+<section id="current-campaigns-section" class="current-campaigns-section section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Current Campaigns</h2>
+        <div class="campaign-list">
+          <div class="campaign-item">
+            <h3>Campaign Title 1</h3>
+            <p>Brief description of the campaign. This is where the details of the campaign will be displayed.</p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="5000" aria-valuemin="0" aria-valuemax="10000">₹5,000 / ₹10,000 (50%)</div>
+            </div>
+            <a href="#" class="btn btn-secondary">View Campaign</a>
+          </div>
+          <div class="campaign-item">
+            <h3>Campaign Title 2</h3>
+            <p>Brief description of the campaign. This is where the details of the campaign will be displayed.</p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="8000" aria-valuemin="0" aria-valuemax="10000">₹8,000 / ₹10,000 (80%)</div>
+            </div>
+            <a href="#" class="btn btn-secondary">View Campaign</a>
+          </div>
+          <!-- Add more campaign items as needed -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Current Campaigns Section -->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    {% block scripts %}
+
+
+    <!-- Service Details Section -->
+    <section id="service-details" class="service-details section">
+      <div class="container">
+
+        <div class="row">
+
+          <!-- <div class="col-lg-4" data-aos="fade-up">
+            <div class="service-box">
+              <h3>Popular Services</h3>
+              <div class="service-list">
+                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Business Analysis</span></a>
+                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Marketing Strategy</span></a>
+                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Social Media</span></a>
+                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Management</span></a>
+                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Graphic Design</span></a>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-box">
+              <h2>Our Service</h2>
+              <p>Ad nobis earum hic explicabo rem expedita. Amet itaque facilis dolor qui in hic omnis temporibus. Perferendis voluptas velit veniam.</p>
+
+              <div class="row gy-4">
+                <div class="col-lg-6">
+                  <div class="service-box">
+                    <h3>Business Analysis</h3>
+                    <p>Fugiat velit quidem distinctio ab voluptas veniam. Maxime sequi quasi atque. Et sint velit et aut dolore.</p>
+                  </div>
+                </div> -->
+                <!-- <div class="col-lg-6">
+                  <div class="service-box">
+                    <h3>Product Management</h3>
+                    <p>Consectetur consequatur vel libero. Id dolor debitis veniam doloribus voluptatibus repellat consequatur.</p>
+                  </div> -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Service Details Section -->
+
+  </main><!-- End #main -->
+
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; 2024 <strong><span>Hopescope</span></strong>. All Rights Reserved.
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+ <!-- Vendor JS Files -->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+<script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+<!-- Main JS File -->
+{% block scripts %}
 <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}
 </body>
+
+
 </html>

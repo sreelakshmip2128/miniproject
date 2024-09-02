@@ -6,15 +6,25 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 
 from django.contrib.auth.decorators import login_required
 
-@login_required
-def dashboard(request):
-    return render(request, 'myapp/dashboard.html')
+
+
+# def dashboard(request):
+#     if request.user.is_authenticated:
+#         return render(request,'dashboard.html')
+#     else:
+#         return redirect('userlogin')
+
+
+
+
+    
+
 
 
 def user_login(request):
@@ -42,12 +52,15 @@ def register(request):
         if Registers.objects.filter(email=email).exists():
             messages.error(request, "Email already exists!")
             return render(request, "myapp/userreg.html")
+        
+        user=User.objects.create_user(username=username,password=password)
 
         # Create a new user
         data = Registers.objects.create(
             username=username,
             email=email,
-            password=make_password(password)  # Hash the password before saving
+            password=make_password(password) , # Hash the password before saving
+            user=user
         )
         data.save()
 
@@ -58,17 +71,32 @@ def register(request):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
             login(request, user)
-            return redirect('dashboard')
+            
+            # Set session variables
+            request.session['username'] = username
+            request.session['user_id'] = user.id
+            print(f"User authenticated, redirecting to dashboard... Username: {username}, User ID: {user.id}")
+            
+            return redirect('dashboard')  # Redirect to the dashboard
         else:
-            return render(request, 'myapp/dashboard.html', {'error': 'Invalid credentials'})
+            messages.error(request, 'Invalid username or password')
+            print("Authentication failed.")
+    
+    return render(request, 'myapp/userlogin.html')
 
-    return render(request, 'myapp/dashboard.html')
+@login_required
+def dashboard(request):
+     if request.user.is_authenticated:
+        return render(request, 'myapp/dashboard.html')
+     else:
+        return redirect("dashboard")
+
 
 def org_reg(request):
     if request.method == "POST":
