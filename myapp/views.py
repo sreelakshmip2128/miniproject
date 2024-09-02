@@ -12,9 +12,20 @@ from django.contrib.auth import authenticate, login
 
 from django.contrib.auth.decorators import login_required
 
-@login_required
+# def dashboard(request):
+#     if request.user.is_authenticated:
+#         return render(request,'dashboard.html')
+#     else:
+#         return redirect('userlogin')
+
+
+
 def dashboard(request):
-    return render(request, 'myapp/dashboard.html')
+     if request.user.is_authenticated:
+        return render(request, 'myapp/dashboard.html', {})
+     else:
+        return redirect("userlogin")
+
 
 
 def user_login(request):
@@ -58,18 +69,17 @@ def register(request):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
             login(request, user)
             return redirect('dashboard')
         else:
-            return render(request, 'myapp/dashboard.html', {'error': 'Invalid credentials'})
+            return render(request, 'userlogin.html', {'error': 'Invalid credentials'})
 
-    return render(request, 'myapp/dashboard.html')
-
+    return render(request, 'myapp/userlogin.html')
 def org_reg(request):
     if request.method == "POST":
         org_name = request.POST.get('org_name')

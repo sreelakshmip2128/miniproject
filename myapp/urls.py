@@ -11,7 +11,7 @@ urlpatterns = [
     path('orglogin/', views.org_login, name='orglogin'),
     path('userreg/', views.register, name='userreg'),
     path('dashboard/', views.dashboard, name='dashboard'),  # Dashboard URL
-    path('login/', views.login_view, name='login'),
+    path('userlogin/', views.login_view, name='userlogin'),
     # path('orgreg/', views.org_reg, name='orgreg'),
      path('orgreg/', views.org_reg, name='orgreg'),
 # new
