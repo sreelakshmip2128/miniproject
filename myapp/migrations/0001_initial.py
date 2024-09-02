@@ -11,15 +11,15 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Organization',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('org_name', models.CharField(max_length=255)),
-                ('org_email', models.EmailField(max_length=254, unique=True)),
-                ('org_password', models.CharField(max_length=50)),
-            ],
-        ),
+        # migrations.CreateModel(
+        #     name='Organization',
+        #     fields=[
+        #         ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+        #         ('org_name', models.CharField(max_length=255)),
+        #         ('org_email', models.EmailField(max_length=254, unique=True)),
+        #         ('org_password', models.CharField(max_length=50)),
+        #     ],
+        # ),
         migrations.CreateModel(
             name='Registers',
             fields=[

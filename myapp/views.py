@@ -12,6 +12,10 @@ from django.contrib.auth import authenticate, login
 
 from django.contrib.auth.decorators import login_required
 
+user = User.objects.filter(username='hopescope2').exists()
+print(user)  
+print(User.objects.all())# Should return True if the user exists
+
 # def dashboard(request):
 #     if request.user.is_authenticated:
 #         return render(request,'dashboard.html')
@@ -19,14 +23,25 @@ from django.contrib.auth.decorators import login_required
 #         return redirect('userlogin')
 
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')  # Redirect to the dashboard
+        else:
+            return render(request, 'myapp/login.html', {'error': 'Invalid credentials'})
+    return render(request, 'myapp/login.html')
 
+@login_required
 def dashboard(request):
-     if request.user.is_authenticated:
-        return render(request, 'myapp/dashboard.html', {})
-     else:
-        return redirect("userlogin")
+    return render(request, 'myapp/dashboard.html')
 
-
+# @login_required
+# def orgdashboard(request):
+#     return render(request, 'myapp/organization_dashboard.html')
 
 def user_login(request):
     return render(request, 'myapp/userlogin.html')
@@ -67,55 +82,55 @@ def register(request):
 
     return render(request, "myapp/userreg.html")
 
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+# def login_view(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = authenticate(request, username=username, password=password)
         
-        if user is not None:
-            login(request, user)
-            return redirect('dashboard')
-        else:
-            return render(request, 'userlogin.html', {'error': 'Invalid credentials'})
+#         if user is not None:
+#             login(request, user)
+#             return redirect('dashboard')
+#         else:
+#             return render(request, 'userlogin.html', {'error': 'Invalid credentials'})
 
-    return render(request, 'myapp/userlogin.html')
-def org_reg(request):
-    if request.method == "POST":
-        org_name = request.POST.get('org_name')
-        org_email = request.POST.get('org_email')
-        org_password = request.POST.get('org_password')
-        confirm_org_password = request.POST.get('confirm_org_password')
+#     return render(request, 'myapp/userlogin.html')
+# def org_reg(request):
+#     if request.method == "POST":
+#         org_name = request.POST.get('org_name')
+#         org_email = request.POST.get('org_email')
+#         org_password = request.POST.get('org_password')
+#         confirm_org_password = request.POST.get('confirm_org_password')
 
-        # Check if passwords match
-        if org_password != confirm_org_password:
-            messages.error(request, "Passwords do not match!")
-            return render(request, "myapp/orgreg.html")
+#         # Check if passwords match
+#         if org_password != confirm_org_password:
+#             messages.error(request, "Passwords do not match!")
+#             return render(request, "myapp/orgreg.html")
 
-        # Check if the email already exists in the database
-        if Organization.objects.filter(org_email=org_email).exists():
-            messages.error(request, "Email already exists!")
-            return render(request, "myapp/orgreg.html")
+#         # Check if the email already exists in the database
+#         if Organization.objects.filter(org_email=org_email).exists():
+#             messages.error(request, "Email already exists!")
+#             return render(request, "myapp/orgreg.html")
 
-        # Create a new organization
-        organization = Organization.objects.create(
-            org_name=org_name,
-            org_email=org_email,
-            org_password=make_password(org_password)  # Hash the password before saving
-        )
-        organization.save()
+#         # Create a new organization
+#         organization = Organization.objects.create(
+#             org_name=org_name,
+#             org_email=org_email,
+#             org_password=make_password(org_password)  # Hash the password before saving
+#         )
+#         organization.save()
 
-        messages.success(request, "Organization registration successful!")
-        return redirect("orglogin")  # Redirect to the organization login page
+#         messages.success(request, "Organization registration successful!")
+#         return redirect("orglogin")  # Redirect to the organization login page
 
-    return render(request, "myapp/orgreg.html")
-
-
+#     return render(request, "myapp/orgreg.html")
 
 
 
-def org_reg(request):
-    return render(request, 'myapp/orgreg.html')
+
+
+# def org_reg(request):
+#     return render(request, 'myapp/orgreg.html')
 
 
 

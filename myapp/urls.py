@@ -13,7 +13,8 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),  # Dashboard URL
     path('userlogin/', views.login_view, name='userlogin'),
     # path('orgreg/', views.org_reg, name='orgreg'),
-     path('orgreg/', views.org_reg, name='orgreg'),
+    #  path('orgreg/', views.org_reg, name='orgreg'),
+    #  path('organization_dashboard/', views.orgdashboard, name='organization_dashboard'),
 # new
     # path('organization/dashboard/', views.organization_dashboard, name='organization_dashboard'),
     # path('user/dashboard/', views.user_dashboard, name='user_dashboard'),
