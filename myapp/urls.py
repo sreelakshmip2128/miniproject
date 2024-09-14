@@ -19,6 +19,8 @@ urlpatterns = [
     path('password_reset_info/', views.ForgotPasswordView.as_view(), name='password_reset_info'),
     path('password_reset_infoo/', views.ForgotPasswordView.as_view(), name='password_reset_infoo'),
 
+    
+
 
     # path('send_reset_link/', send_password_reset_link, name='send_reset_link'),
     
