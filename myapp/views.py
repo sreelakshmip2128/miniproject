@@ -102,10 +102,16 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        remember_me = request.POST.get('remember_me')
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
             login(request, user)
+
+            if remember_me:
+                request.session.set_expiry(1209600)  # 2 weeks in seconds
+            else:
+                request.session.set_expiry(0) 
             
             # Set session variables
             request.session['username'] = username
