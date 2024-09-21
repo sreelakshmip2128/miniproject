@@ -147,3 +147,6 @@ LOGIN_REDIRECT_URL = 'dashboard'
 
 SESSION_COOKIE_AGE = 1209600 
 
+# Add these lines to handle media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

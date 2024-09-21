@@ -1,6 +1,12 @@
 from django.urls import path
 from . import views
-from .views import send_password_reset_link
+from .views import reset_password
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+
+
 
 
 urlpatterns = [
@@ -19,10 +25,12 @@ urlpatterns = [
     path('password_reset_info/', views.ForgotPasswordView.as_view(), name='password_reset_info'),
     path('password_reset_infoo/', views.ForgotPasswordView.as_view(), name='password_reset_infoo'),
 
+    path('profile/', views.profile, name='profile'),
+
     
 
 
-    # path('send_reset_link/', send_password_reset_link, name='send_reset_link'),
+    path('reset_password/', reset_password, name='reset_password'),
     
     
       
@@ -42,4 +50,9 @@ urlpatterns = [
     # path('user/dashboard/', views.user_dashboard, name='user_dashboard'),
     # path('approve/<int:request_id>/', views.approve_request, name='approve_request'),
     # path('reject/<int:request_id>/', views.reject_request, name='reject_request'),
+
+
+
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
