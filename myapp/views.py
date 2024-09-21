@@ -687,14 +687,13 @@ def login_view(request):
 
 @login_required
 def dashboard(request):
-     if request.user.is_authenticated:
-        campaigns = Campaign.objects.filter(user=request.user)  # Fetch campaigns for the logged-in user
-        context = {
-            'campaigns': campaigns
-        }
-        return render(request, 'myapp/dashboard.html')
-     else:
-        return redirect("dashboard")
+    user = request.user
+    try:
+        profile = user.profile  # This will raise an exception if no profile exists
+    except Profile.DoesNotExist:
+        profile = None  # Handle the absence of a profile
+
+    return render(request, 'myapp/dashboard.html', {'user': user, 'profile': profile})
 
 
 from .models import Organization

@@ -56,7 +56,7 @@ class Organization(models.Model):
     org_name = models.CharField(max_length=255)
     org_email = models.EmailField(unique=True)
     org_password = models.CharField(max_length=50)
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization', null=True)  # Allow null initially
     def __str__(self):
         return self.org_name
 
