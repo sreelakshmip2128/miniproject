@@ -99,23 +99,11 @@
           <li class="dropdown"><a href="#"><span>Logins</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="{% url 'userlogin' %}">User Login</a></li>
-
-              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">User</a></li>
-                  <li><a href="#">Startups</a></li>
-                  <li><a href="#">Events</a></li>
-                  <li><a href="#">Volunteering</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li> -->
               <li><a href="{% url 'orglogin' %}">Organization Login</a></li>
-              <!-- <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li> -->
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="{% url 'profile' %}">Profile</a></li>
+          <!-- <li><a href="{% url 'profile' %}">Profile</a></li> -->
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -399,6 +387,35 @@
       <div class="container section-title" data-aos="fade-up">
         <h2>Campaigns</h2>
         <p>Current Campaigns</p>
+
+        
+<div class="row gy-4">
+    {% if campaigns %}
+        {% for campaign in campaigns %}
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-cash-stack" style="color: #0dcaf0;"></i>
+                    </div>
+                    <!-- Link to the campaign detail page -->
+                    <a href="{% url 'campaign_detail' campaign.id %}" class="stretched-link">
+                        <h3>{{ campaign.title }}</h3>
+                    </a>
+                    <!-- Campaign Description -->
+                    <p>{{ campaign.description }}</p>
+                    <!-- Display campaign goal amount -->
+                    <p>Goal: {{ campaign.goal_amount }}</p>
+                    <!-- If an image is available, display it -->
+                    {% if campaign.image %}
+                        <img src="{{ campaign.image.url }}" alt="{{ campaign.title }} image" style="width: 100%; height: auto;">
+                    {% endif %}
+                </div>
+            </div><!-- End Service Item -->
+        {% endfor %}
+    {% else %}
+        <p>No campaigns are available at the moment.</p>
+    {% endif %}
+</div>
       </div><!-- End Section Title -->
 
       <div class="container">

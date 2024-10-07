@@ -60,23 +60,9 @@
              
             </ul>
           </li>
-          <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-             
-            
-              <li><a href="{% url 'userreg' %}">As User</a></li>
-              <li><a href="{% url 'orgreg' %}">As Organization</a></li>
-              
-            </ul>
-            </li>
-          <li class="dropdown"><a href="#"><span>Logins</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="{% url 'userlogin' %}">User Login</a></li>
-            
-              <li><a href="{% url 'orglogin' %}">Organization Login</a></li>
-           
-            </ul>
-          </li>
+         
+        
+          <li><a href="{% url 'profile' %}">Profile</a></li>
 
           <div><a href="{% url 'logout' %}">Logout</a></div>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -116,6 +102,57 @@
 
          
                 </div><section id="services" class="services section">
+                  <div>
+
+                    {% if profile %}
+                        <p>Profile: {{ profile }}</p>
+                    {% else %}
+                        <p>No profile found. Please complete your profile.</p>
+                    {% endif %}
+                
+                    <!-- Display campaigns if they exist -->
+</div>
+                </div><section id="services" class="services section">
+
+                    <!-- Section Title -->
+                    <div class="container section-title" data-aos="fade-up">
+                      <h2>Campaigns</h2>
+                      <p>Current Campaigns</p>
+                    </div><!-- End Section Title -->
+              
+                    <div class="container">
+              
+                      <div class="row gy-4">
+              
+                        <h2>Your Campaigns</h2>
+                        <div class="row gy-4">
+                            {% if campaigns %}
+                                {% for campaign in campaigns %}
+                                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                        <div class="service-item position-relative">
+                                            <div class="icon">
+                                                <i class="bi bi-cash-stack" style="color: #0dcaf0;"></i>
+                                            </div>
+                                            <!-- Link to the campaign detail page -->
+                                            <a href="{% url 'campaign_detail' campaign.id %}" class="stretched-link">
+                                                <h3>{{ campaign.title }}</h3>
+                                            </a>
+                                            <!-- Campaign Description -->
+                                            <p>{{ campaign.description }}</p>
+                                            <!-- Display campaign goal amount -->
+                                            <p>Goal: {{ campaign.goal_amount }}</p>
+                                            <!-- If an image is available, display it -->
+                                            {% if campaign.image %}
+                                                <img src="{{ campaign.image.url }}" alt="{{ campaign.title }} image" style="width: 100%; height: auto;">
+                                            {% endif %}
+                                        </div>
+                                    </div><!-- End Service Item -->
+                                {% endfor %}
+                            {% else %}
+                                <p>You have not created any campaigns.</p>
+                            {% endif %}
+                        </div>
+                        
 
                     <!-- Section Title -->
                     <div class="container section-title" data-aos="fade-up">
@@ -198,6 +235,16 @@
                             <p>Introducing EcoHome, an innovative smart home energy management system designed to optimize energy use and reduce utility bills. Our system uses real-time data and machine learning to adjust lighting, heating, and cooling based on user behavior and environmental conditions. By investing in EcoHome, you help us finalize product development, conduct field tests, and launch a user-friendly app interface. Join us in making homes smarter and more sustainable.</p>
                           </div>
                         </div>
+
+                        <div style="text-align: center;">
+                          <h2>More more details check videos </h2>
+                          <p>
+                              <a href="https://www.youtube.com/watch?v=8CifN2yqdg4" target="_blank">
+                                  Watch on YouTube
+                              </a>
+                          </p>
+                      </div>
+
                     <!-- End Service Item -->
 
                 </div>

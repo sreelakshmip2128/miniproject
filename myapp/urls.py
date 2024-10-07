@@ -26,6 +26,7 @@ urlpatterns = [
     path('password_reset_infoo/', views.ForgotPasswordView.as_view(), name='password_reset_infoo'),
 
     path('profile/', views.profile, name='profile'),
+    path('campaign/<int:id>/', views.campaign_detail, name='campaign_detail'),
 
     
 
@@ -43,15 +44,6 @@ urlpatterns = [
     path('create_campaign/', views.create_campaign, name='create_campaign'),
 
     path('logout/',views.logoutt, name='logout'),
-
-    
-# new
-    # path('organization/dashboard/', views.organization_dashboard, name='organization_dashboard'),
-    # path('user/dashboard/', views.user_dashboard, name='user_dashboard'),
-    # path('approve/<int:request_id>/', views.approve_request, name='approve_request'),
-    # path('reject/<int:request_id>/', views.reject_request, name='reject_request'),
-
-
 
 ]
 if settings.DEBUG:

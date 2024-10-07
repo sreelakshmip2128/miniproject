@@ -6,7 +6,7 @@
 
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>User Login</title>
+  <title> {{ campaign.title }}</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -59,7 +59,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="{% url 'index' %}" class="logo d-flex align-items-center">
+        <a href="{% url 'index' %}" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">HOPESCOPE</h1>
@@ -69,6 +69,8 @@
         <ul>
          
           
+          </li>
+          <!-- <li><a href="#contact">Contact</a></li> -->
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -77,58 +79,55 @@
   </header>
 
   <main class="main">
-
     <!-- Page Title -->
-    <div class="page-title dark-background">
+    <div class="page-title dark-background text-center">
       <div class="container position-relative">
-        <h1>Create Campaign</h1>
+        <!-- Campaign Title -->
+        <h1>{{ campaign.title }}</h1>
         
+        <!-- Breadcrumbs Navigation -->
         <nav class="breadcrumbs">
           <ol>
             <li><a href="{% url 'index' %}">Home</a></li>
-            <li class="current">User Login</li>
+            <li class="current">Description</li>
           </ol>
         </nav>
       </div>
     </div><!-- End Page Title -->
-
-    <div class="container mt-5 d-flex justify-content-center align-items-center" style="height: 50vh;">
-        <!-- Add a card component for better styling -->
-        <div class="card shadow-sm border-light" style="width: 100%; max-width: 400px;">
-            <div class="card-body">
-               
-                <h2>Create a New Campaign</h2>
-                <form method="post" action="{% url 'create_campaign' %}">
-                  {% csrf_token %}
-                  <div class="form-group">
-                    <label for="title">Campaign Title</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="goal_amount">Goal Amount</label>
-                    <input type="number" class="form-control" id="goal_amount" name="goal_amount" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="image">Upload Image</label>
-                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                </div>
-               
-                  <button type="submit" class="btn btn-success">Create Campaign</button>
-                
-                </form>
-            </div>
+  
+    <!-- Campaign Details Section -->
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto"> <!-- Align content to center -->
+          <h2>{{ campaign.title }}</h2>
+  
+          <!-- Goal Amount -->
+          <p><strong>Goal:</strong> ₹{{ campaign.goal_amount }}</p>
+  
+          <!-- Campaign Description -->
+          <p><strong>Description:</strong> {{ campaign.description }}</p>
+  
+          <!-- Display Image if available -->
+          {% if campaign.image %}
+          <img src="{{ campaign.image.url }}" alt="{{ campaign.title }}" class="img-fluid rounded my-4" />
+          {% endif %}
+  
+          <!-- Donation Button -->
+          <div class="my-4 text-center">
+            <a href="https://razorpay.com/" target="_blank">
+              <button type="button" class="btn btn-primary">Donate Rs. 10</button>
+            </a>
+          </div>
         </div>
+      </div>
     </div>
-
+  </main>
+  
     <!-- Image and Description Section -->
    
     <!-- Service Details Section -->
     
-
+</p>
   </main><!-- End #main -->
 
   <footer id="footer" class="footer">

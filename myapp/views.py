@@ -685,15 +685,32 @@ def login_view(request):
     
     return render(request, 'myapp/userlogin.html')
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from .models import Campaign, Profile  # Assuming you have a Profile model
+
 @login_required
 def dashboard(request):
     user = request.user
+    
+    # Check if the user has a profile and handle cases where no profile exists
     try:
-        profile = user.profile  # This will raise an exception if no profile exists
+        profile = user.profile  # Assuming a one-to-one relationship between User and Profile
     except Profile.DoesNotExist:
-        profile = None  # Handle the absence of a profile
+        profile = None
 
-    return render(request, 'myapp/dashboard.html', {'user': user, 'profile': profile})
+    # If the user has campaigns associated with them, we can fetch them
+    campaigns = Campaign.objects.filter(user=user) if profile else []
+
+    # Add more context if necessary (e.g., handle organization-specific logic)
+    context = {
+        'user': user,
+        'profile': profile,
+        'campaigns': campaigns
+    }
+
+    return render(request, 'myapp/dashboard.html', context)
+
 
 
 from .models import Organization
@@ -743,9 +760,87 @@ def orgdashboard(request):
 #     return render(request, 'myapp/orgreg.html')
 
 
+# //////////////////
+
+# from .models import Organization
+
+# def organization(request):
+#     if request.method == "POST":
+#         username = request.POST.get('username')
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+#         confirmpassword = request.POST.get('confirmpassword')
+
+       
+#         if password != confirmpassword:
+#             messages.error(request, "Passwords do not match!")
+#             return render(request, "myapp/userreg.html")
+
+       
+#         if Organization.objects.filter(email=email).exists():
+#             messages.error(request, "Email already exists!")
+#             return render(request, "myapp/orgreg.html")
+        
+#         user=User.objects.create_user(username=username,password=password)
+
+        
+#         data = Organization.objects.create(
+#             username=username,
+#             email=email,
+#             password=make_password(password) , 
+#             user=user
+#         )
+#         data.save()
+
+#         messages.success(request, "Registration successful!")
+#         return redirect("orglogin")  
+#     return render(request, "myapp/orgreg.html")
+
+# def loginview(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         remember_me = request.POST.get('remember_me')
+#         user = authenticate(request, username=username, password=password)
+        
+#         if user is not None:
+#             login(request, user)
+
+#             if remember_me:
+#                 request.session.set_expiry(1209600)  # 2 weeks in seconds
+#             else:
+#                 request.session.set_expiry(0) 
+            
+         
+#             request.session['username'] = username
+#             request.session['user_id'] = user.id
+#             print(f"User authenticated, redirecting to dashboard... Username: {username}, User ID: {user.id}")
+            
+#             return redirect('organization_dashboard')  
+#         else:
+#             messages.error(request, 'Invalid username or password')
+#             print("Authentication failed.")
+    
+#     return render(request, 'myapp/orglogin.html')
+
+# @login_required
+# def organization_dashboard(request):
+#     user = request.user
+#     try:
+#         profile = user.profile 
+#     except Profile.DoesNotExist:
+#         profile = None  
+#     return render(request, 'myapp/organizaton_dashboard.html', {'user': user, 'profile': profile})
+
+# ///////////////////
+
 
 def index(request):
-    return render(request, 'myapp/index.html')
+    # Retrieve all campaigns from the database
+    campaigns = Campaign.objects.all()
+
+    # Pass the campaigns to the index.html template
+    return render(request, 'myapp/index.html', {'campaigns': campaigns})
 
 def service_details(request):
     return render(request, 'myapp/service-details.html')
@@ -758,6 +853,14 @@ def starter_page(request):
 
 def campaign2(request):
     return render(request, 'myapp/campaign2.html')
+
+from django.shortcuts import render, get_object_or_404
+from .models import Campaign
+
+def campaign_detail(request, id):
+    campaign = get_object_or_404(Campaign, id=id)
+    return render(request, 'myapp/campaign_detail.html', {'campaign': campaign})
+
 
 
 
@@ -803,15 +906,15 @@ def reset_password(request):
         
         # Check if passwords match
         if password != confirm_password:
-            messages.error(request, _("Passwords do not match."))
+            messages.error(request, ("Passwords do not match."))
         elif len(password) < 8:
-            messages.error(request, _("Password must be at least 8 characters long."))
+            messages.error(request, ("Password must be at least 8 characters long."))
         else:
             user = request.user
             user.set_password(password)
             user.save()
             update_session_auth_hash(request, user)  # Keep the user logged in
-            messages.success(request, _("Password has been reset successfully."))
+            messages.success(request, ("Password has been reset successfully."))
             return redirect('index')  # Redirect to a success page or login page
 
         return render(request, 'reset_password.html')

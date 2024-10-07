@@ -47,8 +47,6 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="{% url 'index' %}" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">HOPESCOPE</h1>
       </a>
 
@@ -59,19 +57,8 @@
                 <a href="{% url 'create_campaign' %}" class="btn btn-primary">Create New Campaign</a>
             </ul>
           </li>
-          <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-             
-              <li><a href="{% url 'userreg' %}">As User</a></li>
-              <li><a href="{% url 'orgreg' %}">As Organization</a></li>
-         </ul>
-            </li>
-          <li class="dropdown"><a href="#"><span>Logins</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="{% url 'userlogin' %}">User Login</a></li>
-              <li><a href="{% url 'orglogin' %}">Organization Login</a></li>
-            </ul>
-          </li>
+         
+         
           <li><a href="{% url 'profile' %}">Profile</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
@@ -82,11 +69,11 @@
   </header>
 
   <main class="main">
-
+    
     <!-- Page Title -->
     <div class="page-title dark-background">
       <div class="container position-relative">
-        <h1>Welcome User</h1>
+        <h1>Welcome {{ user.username }}</h1>
        
         <nav class="breadcrumbs">
           <ol>
@@ -109,40 +96,21 @@
       <div class="container">
 
         <div class="row">
-          <h2>My Campaigns</h2>
+         
 
   
 
-          <!-- <div class="col-lg-4" data-aos="fade-up">
-            <div class="service-box">
-              <h3>Popular Services</h3>
-              <div class="service-list">
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Business Analysis</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Marketing Strategy</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Social Media</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Management</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Graphic Design</span></a>
-              </div>
-            </div>
-          </div> -->
+         
+                  <div>
 
-          <!-- <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-box">
-              <h2>Our Service</h2>
-              <p>Ad nobis earum hic explicabo rem expedita. Amet itaque facilis dolor qui in hic omnis temporibus. Perferendis voluptas velit veniam.</p>
-
-              <div class="row gy-4">
-                <div class="col-lg-6">
-                  <div class="service-box">
-                    <h3>Business Analysis</h3>
-                    <p>Fugiat velit quidem distinctio ab voluptas veniam. Maxime sequi quasi atque. Et sint velit et aut dolore.</p>
-                  </div>
-                </div> -->
-                <!-- <div class="col-lg-6">
-                  <div class="service-box">
-                    <h3>Product Management</h3>
-                    <p>Consectetur consequatur vel libero. Id dolor debitis veniam doloribus voluptatibus repellat consequatur.</p>
-                  </div> -->
+                    {% if profile %}
+                        <p>Profile: {{ profile }}</p>
+                    {% else %}
+                        <p>No profile found. Please complete your profile.</p>
+                    {% endif %}
+                
+                    <!-- Display campaigns if they exist -->
+</div>
                 </div><section id="services" class="services section">
 
                     <!-- Section Title -->
@@ -155,18 +123,36 @@
               
                       <div class="row gy-4">
               
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                          <div class="service-item  position-relative">
-                            <div class="icon">
-                              <i class="bi bi-cash-stack" style="color: #0dcaf0;"></i>
-                            </div>
-                            <a href="{% url 'campaign2' %}" class="stretched-link">
-                              <h3>Bright Futures</h3>
-                            </a>
-                            <p>Empowering Underprivileged Children : <br>"Join us in our mission to provide education, food, and shelter to underprivileged children in our community. Your donation will help us fund school supplies, nutritious meals, and safe living conditions for kids who need it most. Every contribution makes a difference in creating a brighter future for these young lives. Together, we can ensure that every child has the opportunity to learn, grow, and thrive."</p>
-                          </div>
-                        </div><!-- End Service Item -->
-              
+                        <h2>Your Campaigns</h2>
+                        <div class="row gy-4">
+                            {% if campaigns %}
+                                {% for campaign in campaigns %}
+                                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                        <div class="service-item position-relative">
+                                            <div class="icon">
+                                                <i class="bi bi-cash-stack" style="color: #0dcaf0;"></i>
+                                            </div>
+                                            <!-- Link to the campaign detail page -->
+                                            <a href="{% url 'campaign_detail' campaign.id %}" class="stretched-link">
+                                                <h3>{{ campaign.title }}</h3>
+                                            </a>
+                                            <!-- Campaign Description -->
+                                            <p>{{ campaign.description }}</p>
+                                            <!-- Display campaign goal amount -->
+                                            <p>Goal: {{ campaign.goal_amount }}</p>
+                                            <!-- If an image is available, display it -->
+                                            {% if campaign.image %}
+                                                <img src="{{ campaign.image.url }}" alt="{{ campaign.title }} image" style="width: 100%; height: auto;">
+                                            {% endif %}
+                                        </div>
+                                    </div><!-- End Service Item -->
+                                {% endfor %}
+                            {% else %}
+                                <p>You have not created any campaigns.</p>
+                            {% endif %}
+                        </div>
+                        
+                        
                         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                           <div class="service-item position-relative">
                             <div class="icon">
@@ -228,7 +214,7 @@
                         </div>
 
                         <div style="text-align: center;">
-                          <h2>More more details check our video </h2>
+                          <h2>More more details check videos </h2>
                           <p>
                               <a href="https://www.youtube.com/watch?v=8CifN2yqdg4" target="_blank">
                                   Watch on YouTube
