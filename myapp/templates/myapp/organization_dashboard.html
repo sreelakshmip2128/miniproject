@@ -32,6 +32,26 @@
 {% block styles %}
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
 {% endblock %}
+
+<style>
+  .back-button {
+      background-color: transparent; /* Make the background transparent */
+      border: none; /* No border */
+      color: #ebeef0; /* Change color to your preference */
+      font-size: 30px; /* Font size */
+      cursor: pointer; /* Change cursor to pointer */
+      padding: 20px; /* Padding around the text */
+      transition: color 0.3s; /* Smooth transition for hover effect */
+  }
+
+  .back-button:hover {
+      color: #02080e; /* Darker color on hover */
+  }
+
+  .back-button:focus {
+      outline: none; /* Remove focus outline */
+  }
+</style>
   <!-- =======================================================
   * Template Name: Selecao
   * Template URL: https://bootstrapmade.com/selecao-bootstrap-template/
@@ -44,6 +64,7 @@
 <body class="service-details-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
+    <div><button type="button" class="back-button" onclick="goBack()">&#8592;</button> </div>
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="{% url 'index' %}" class="logo d-flex align-items-center">
@@ -60,23 +81,9 @@
              
             </ul>
           </li>
-          <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-             
-            
-              <li><a href="{% url 'userreg' %}">As User</a></li>
-              <li><a href="{% url 'orgreg' %}">As Organization</a></li>
-              
-            </ul>
-            </li>
-          <li class="dropdown"><a href="#"><span>Logins</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="{% url 'userlogin' %}">User Login</a></li>
-            
-              <li><a href="{% url 'orglogin' %}">Organization Login</a></li>
-           
-            </ul>
-          </li>
+         
+        
+          <li><a href="{% url 'profile' %}">Profile</a></li>
 
           <div><a href="{% url 'logout' %}">Logout</a></div>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -90,12 +97,12 @@
     <!-- Page Title -->
     <div class="page-title dark-background">
       <div class="container position-relative">
-        <h1>Welcome Organization</h1>
+        <h1>Welcome {{ user.username }}</h1>
         <!-- <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p> -->
         <nav class="breadcrumbs">
           <ol>
             <li><a href="{% url 'index' %}">Home</a></li>
-            <li class="current">User</li>
+            <li class="current">Organization</li>
           </ol>
         </nav>
       </div>
@@ -116,6 +123,8 @@
 
          
                 </div><section id="services" class="services section">
+                
+                </div><section id="services" class="services section">
 
                     <!-- Section Title -->
                     <div class="container section-title" data-aos="fade-up">
@@ -127,77 +136,91 @@
               
                       <div class="row gy-4">
               
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                          <div class="service-item  position-relative">
-                            <div class="icon">
-                              <i class="bi bi-cash-stack" style="color: #0dcaf0;"></i>
-                            </div>
-                            <a href="{% url 'campaign2' %}" class="stretched-link">
-                              <h3>Bright Futures</h3>
-                            </a>
-                            <p>Empowering Underprivileged Children : <br>"Join us in our mission to provide education, food, and shelter to underprivileged children in our community. Your donation will help us fund school supplies, nutritious meals, and safe living conditions for kids who need it most. Every contribution makes a difference in creating a brighter future for these young lives. Together, we can ensure that every child has the opportunity to learn, grow, and thrive."</p>
-                          </div>
-                        </div><!-- End Service Item -->
-              
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                          <div class="service-item position-relative">
-                            <div class="icon">
-                              <i class="bi bi-calendar4-week" style="color: #fd7e14;"></i>
-                            </div>
-                            <a href="{% url 'campaign2' %}" class="stretched-link">
-                              <h3>GreenTech: Revolutionizing Sustainability with Cutting-Edge Technology</h3>
-                            </a>
-                            <p>Welcome to GreenTech, where innovation meets sustainability. We’re developing advanced, eco-friendly technology that reduces waste and energy consumption while promoting a healthier planet. Our flagship product, the EcoSmart Device, integrates seamlessly into everyday life, helping users minimize their carbon footprint. With your support, we can accelerate production, enhance our technology, and bring our vision of a greener future to life. Be part of the solution—invest in GreenTech today.</p>
-                          </div>
-                        </div><!-- End Service Item -->
-              
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                          <div class="service-item position-relative">
-                            <div class="icon">
-                              <i class="bi bi-chat-text" style="color: #20c997;"></i>
-                            </div>
-                            <a href="{% url 'campaign2' %}" class="stretched-link">
-                              <h3>Rebuilding Lives: Support Hurricane Relief Efforts</h3>
-                            </a>
-                            <p> In the wake of the recent hurricane, countless families are left without homes, food, and basic necessities. Our disaster relief fund is dedicated to providing immediate assistance and long-term support for affected communities. Your donation will help supply emergency aid, rebuild homes, and offer psychological support to those impacted. Stand with us in the face of adversity and help rebuild lives from the ground up..</p>
-                          </div>
-                        </div><!-- End Service Item -->
-              
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                          <div class="service-item position-relative">
-                            <div class="icon">
-                              <i class="bi bi-credit-card-2-front" style="color: #df1529;"></i>
-                            </div>
-                            <a href="{% url 'campaign2' %}" class="stretched-link">
-                              <h3>Community Garden Initiative</h3>
-                            </a>
-                            <p> Our neighborhood is in need of a green oasis where everyone can connect with nature, learn about sustainable practices, and enjoy fresh produce. The "Grow Together" community garden aims to transform a vacant lot into a thriving garden space. Your donation will help us purchase soil, seeds, tools, and educational materials for local workshops. Additionally, funds will go towards building raised garden beds and installing water-saving irrigation systems. Help us cultivate a space where our community can flourish together.</p>
-                          </div>
-                        </div><!-- End Service Item -->
-              
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                          <div class="service-item position-relative">
-                            <div class="icon">
-                              <i class="bi bi-globe" style="color: #6610f2;"></i>
-                            </div>
-                            <a href="{% url 'campaign2' %}" class="stretched-link">
-                              <h3>Medical Supplies for Rural Clinics</h3>
-                            </a>
-                            <p> Access to basic medical supplies can mean the difference between life and death in rural areas. Our campaign seeks to deliver critical medical supplies—including antibiotics, vaccines, and diagnostic tools—to clinics serving remote communities. These clinics are often under-resourced but provide essential care to those who need it most. Your donation will directly support the procurement and distribution of these vital supplies, ensuring that healthcare professionals have the tools they need to save lives.</p>
-                          </div>
-                        </div><!-- End Service Item -->
-              
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                          <div class="service-item position-relative">
-                            <div class="icon">
-                              <i class="bi bi-clock" style="color: #f3268c;"></i>
-                            </div>
-                            <a href="{% url 'campaign2' %}" class="stretched-link">
-                              <h3>Smart Home Energy Management System</h3>
-                            </a>
-                            <p>Introducing EcoHome, an innovative smart home energy management system designed to optimize energy use and reduce utility bills. Our system uses real-time data and machine learning to adjust lighting, heating, and cooling based on user behavior and environmental conditions. By investing in EcoHome, you help us finalize product development, conduct field tests, and launch a user-friendly app interface. Join us in making homes smarter and more sustainable.</p>
-                          </div>
+                        <h2>Your Campaigns</h2>
+                        <div class="row gy-4">
+                            {% if campaigns %}
+                                {% for campaign in campaigns %}
+                                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                        <div class="service-item position-relative">
+                                            <div class="icon">
+                                                <i class="bi bi-cash-stack" style="color: #0dcaf0;"></i>
+                                            </div>
+                                            <!-- Link to the campaign detail page -->
+                                            <a href="{% url 'campaign_detail' campaign.id %}" class="stretched-link">
+                                                <h3>{{ campaign.title }}</h3>
+                                            </a>
+                                            <!-- Campaign Description -->
+                                            <p>{{ campaign.description }}</p>
+                                            <!-- Display campaign goal amount -->
+                                            <p>Goal: {{ campaign.goal_amount }}</p>
+                                            <!-- If an image is available, display it -->
+                                            {% if campaign.image %}
+                                                <img src="{{ campaign.image.url }}" alt="{{ campaign.title }} image" style="width: 100%; height: auto;">
+                                            {% endif %}
+                                        </div>
+                                    </div><!-- End Service Item -->
+                                {% endfor %}
+                            {% else %}
+                                <p>You have not created any campaigns.</p>
+                            {% endif %}
                         </div>
+                        
+
+                    <!-- Section Title -->
+                  
+                       
+                        <div>
+                          {% block content %}
+                              <h2>Verifications</h2>
+                              <p>Here are the campaigns available for verification:</p>
+                              
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>Title</th>
+                                          <th>Description</th>
+                                          <th>Details</th>  <!-- Moved this column before Status -->
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      {% for campaign in campaigns %}
+                                          <tr>
+                                              <td>{{ campaign.title }}</td>
+                                              <td>
+                                                <strong>Posted by:</strong> {{ campaign.user.username }}<br>
+                                                <strong>Email:</strong> {{ campaign.user.email }}<br>
+                                               
+         
+                                                <strong>Created at:</strong> {{ campaign.created_at|date:"Y-m-d H:i" }} <!-- Display creation date -->
+                                            </td>
+                                              <td>
+                                                  <a href="{% url 'campaign_detail' campaign.id %}" class="btn btn-info">View Details</a> <!-- Link to view details -->
+                                              </td>
+                                              <td>
+                                                  {% if campaign.verified %}
+                                                      <span class="badge bg-success">Verified</span>
+                                                  {% else %}
+                                                      <span class="badge bg-danger">Not Verified</span>
+                                                  {% endif %}
+                                              </td>
+                                              <td>
+                                                  {% if not campaign.verified %}
+                                                      <form method="post" action="{% url 'verify_campaign' campaign.id %}">
+                                                          {% csrf_token %}
+                                                          <button type="submit" class="btn btn-primary">Verify</button>
+                                                      </form>
+                                                  {% endif %}
+                                              </td>
+                                          </tr>
+                                      {% endfor %}
+                                  </tbody>
+                              </table>
+                          {% endblock %}
+                      </div>
+                      
+
                     <!-- End Service Item -->
 
                 </div>
@@ -227,6 +250,10 @@
 <script src="{% static 'vendor/aos/aos.js' %}"></script>
 <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
 <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script>function goBack() {
+  window.history.back();
+}</script>
+
 
 <!-- Main JS File -->
 {% block scripts %}

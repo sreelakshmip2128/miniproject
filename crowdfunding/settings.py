@@ -150,4 +150,9 @@ SESSION_COOKIE_AGE = 1209600
 
 # Add these lines to handle media files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# settings.py
+RAZORPAY_KEY_ID = "rzp_test_edrzdb8Gbx5U5M"
+RAZORPAY_KEY_SECRET = "XgwjnFvJQNG6cS7Q13aHKDJj"
+

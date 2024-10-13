@@ -5,53 +5,32 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-
-
-
-
 urlpatterns = [
     path('', views.index, name='index'),
-    path('service-details/', views.service_details, name='service_details'),
-    path('portfolio-details/', views.portfolio_details, name='portfolio_details'),
-    path('starter-page/', views.starter_page, name='starter_page'),
-    path('campaign2/', views.campaign2, name='campaign2'),
-    # path('userlogin/', views.user_login, name='userlogin'),
-    path('orglogin/', views.org_login, name='orglogin'),
     path('userreg/', views.register, name='userreg'),
-    # Dashboard URL
     path('userlogin/', views.login_view, name='userlogin'),
     path('dashboard/', views.dashboard, name='dashboard'),
-
-    path('password_reset_info/', views.ForgotPasswordView.as_view(), name='password_reset_info'),
-    path('password_reset_infoo/', views.ForgotPasswordView.as_view(), name='password_reset_infoo'),
-
+    path('orglogin/', views.org_login, name='orglogin'),
+    path('orgreg/', views.org_reg, name='orgreg'),
+    path('orgdashboard/', views.orgdashboard, name='orgdashboard'),
     path('profile/', views.profile, name='profile'),
-
+    path('create_campaign/', views.create_campaign, name='create_campaign'),
+    path('campaign/<int:id>/', views.campaign_detail, name='campaign_detail'),
+    path('logout/',views.logoutt, name='logout'),
+    path('campaign/<int:campaign_id>/verify/', views.verify_campaign, name='verify_campaign'),
+    path('delete/<int:campaign_id>/', views.delete_campaign, name='delete_campaign'),
+    path('donate/', views.donate, name='donate'),  # Donation page
+    path('payment/callback/', views.payment_callback, name='payment_callback'),
     
 
 
     path('reset_password/', reset_password, name='reset_password'),
-    
-    
-      
-    
-    path('orgreg/', views.org_reg, name='orgreg'),
-    path('orglogin/', views.org_login, name='orglogin'),
-    path('orgdashboard/', views.orgdashboard, name='orgdashboard'),
-
-
-    path('create_campaign/', views.create_campaign, name='create_campaign'),
-
-    path('logout/',views.logoutt, name='logout'),
-
-    
-# new
-    # path('organization/dashboard/', views.organization_dashboard, name='organization_dashboard'),
-    # path('user/dashboard/', views.user_dashboard, name='user_dashboard'),
-    # path('approve/<int:request_id>/', views.approve_request, name='approve_request'),
-    # path('reject/<int:request_id>/', views.reject_request, name='reject_request'),
-
-
+    path('campaign2/', views.campaign2, name='campaign2'),
+    path('service-details/', views.service_details, name='service_details'),
+    path('portfolio-details/', views.portfolio_details, name='portfolio_details'),
+    path('starter-page/', views.starter_page, name='starter_page'),
+    path('password_reset_info/', views.ForgotPasswordView.as_view(), name='password_reset_info'),
+    path('password_reset_infoo/', views.ForgotPasswordView.as_view(), name='password_reset_infoo'),
 
 ]
 if settings.DEBUG:

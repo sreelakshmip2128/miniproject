@@ -32,6 +32,26 @@
 {% block styles %}
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
 {% endblock %}
+
+<style>
+  .back-button {
+      background-color: transparent; /* Make the background transparent */
+      border: none; /* No border */
+      color: #ebeef0; /* Change color to your preference */
+      font-size: 30px; /* Font size */
+      cursor: pointer; /* Change cursor to pointer */
+      padding: 20px; /* Padding around the text */
+      transition: color 0.3s; /* Smooth transition for hover effect */
+  }
+
+  .back-button:hover {
+      color: #02080e; /* Darker color on hover */
+  }
+
+  .back-button:focus {
+      outline: none; /* Remove focus outline */
+  }
+</style>
   <!-- =======================================================
   * Template Name: Selecao
   * Template URL: https://bootstrapmade.com/selecao-bootstrap-template/
@@ -57,6 +77,7 @@
 <body class="user-login-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
+    <div><button type="button" class="back-button" onclick="goBack()">&#8592;</button> </div>
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
         <a href="{% url 'index' %}" class="logo d-flex align-items-center">
@@ -67,41 +88,12 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <!-- <li><a href="#hero" class="active">Home</a></li> -->
-          <!-- <li><a href="#about">About</a></li> -->
-          <!-- <li><a href="#services">Services</a></li> -->
-          <!-- <li><a href="#portfolio">Portfolio</a></li>
-           <li><a href="#team">Team</a></li>  -->
-          <!-- <li><a href="blog.html">Blog</a></li> -->
-          <li class="dropdown"><a href="#"><span>Categories</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Charity</a></li>
-              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">User</a></li>
-                  <li><a href="#">Startups</a></li>
-                  <li><a href="#">Events</a></li>
-                  <li><a href="#">Volunteering</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li> -->
-              <li><a href="#">Starups</a></li>
-              <li><a href="#">Campaigns</a></li>
-              <li><a href="#">Events</a></li>
-            </ul>
-          </li>
+         
+          
           <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
              
-              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">User</a></li>
-                  <li><a href="#">Startups</a></li>
-                  <li><a href="#">Events</a></li>
-                  <li><a href="#">Volunteering</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li> -->
+             
               <li><a href="{% url 'userreg' %}">As User</a></li>
               <li><a href="{% url 'orgreg' %}">As Organization</a></li>
               
@@ -110,21 +102,9 @@
           <li class="dropdown"><a href="#"><span>Logins</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="{% url 'userlogin' %}">User Login</a></li>
-              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">User</a></li>
-                  <li><a href="#">Startups</a></li>
-                  <li><a href="#">Events</a></li>
-                  <li><a href="#">Volunteering</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li> -->
               <li><a href="{% url 'orglogin' %}">Organization Login</a></li>
-              <!-- <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li> -->
             </ul>
           </li>
-          <!-- <li><a href="#contact">Contact</a></li> -->
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -172,7 +152,7 @@
                 <div class="mt-3">
                     <a href="{% url 'password_reset_info' %}">Forgot Password?</a>
                 </div>
-                <div><a href="{% url 'logout' %}">Logout</a></div>
+              
             </form>
             </div>
         </div>
@@ -200,6 +180,10 @@
 <script src="{% static 'vendor/aos/aos.js' %}"></script>
 <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
 <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script>function goBack() {
+  window.history.back();
+}</script>
+
 
 <!-- Main JS File -->
 {% block scripts %}

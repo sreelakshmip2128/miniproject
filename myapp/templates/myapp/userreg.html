@@ -43,6 +43,26 @@
         border-color: #333333; /* Darker black border color for hover */
         color: #ffffff; /* White text color on hover */
     }
+
+  
+  .back-button {
+      background-color: transparent; /* Make the background transparent */
+      border: none; /* No border */
+      color: #ebeef0; /* Change color to your preference */
+      font-size: 30px; /* Font size */
+      cursor: pointer; /* Change cursor to pointer */
+      padding: 20px; /* Padding around the text */
+      transition: color 0.3s; /* Smooth transition for hover effect */
+  }
+
+  .back-button:hover {
+      color: #02080e; /* Darker color on hover */
+  }
+
+  .back-button:focus {
+      outline: none; /* Remove focus outline */
+  }
+
   </style>
 
 </head>
@@ -50,6 +70,7 @@
 <body class="user-registration-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
+    <div><button type="button" class="back-button" onclick="goBack()">&#8592;</button> </div>
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
         <a href="{% url 'index' %}" class="logo d-flex align-items-center">
@@ -142,6 +163,9 @@
  <script src="{% static 'vendor/aos/aos.js' %}"></script>
  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+ <script>function goBack() {
+  window.history.back();
+}</script>
 
  <!-- Main JS File -->
  {% block scripts %}
