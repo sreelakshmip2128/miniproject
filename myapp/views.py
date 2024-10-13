@@ -91,6 +91,10 @@ def login_view(request):
     
     return render(request, 'myapp/userlogin.html')
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from .models import Campaign, Profile  # Assuming you have a Profile model
+
 @login_required
 def dashboard(request):
     user = request.user
@@ -100,6 +104,7 @@ def dashboard(request):
         profile = user.profile  # Assuming a one-to-one relationship between User and Profile
     except Profile.DoesNotExist:
         profile = None
+<<<<<<< HEAD
 
     # If the user has campaigns associated with them, we can fetch them
     campaigns = Campaign.objects.filter(user=user) if profile else []
@@ -112,6 +117,21 @@ def dashboard(request):
     }
 
     return render(request, 'myapp/dashboard.html', context)
+=======
+
+    # If the user has campaigns associated with them, we can fetch them
+    campaigns = Campaign.objects.filter(user=user) if profile else []
+
+    # Add more context if necessary (e.g., handle organization-specific logic)
+    context = {
+        'user': user,
+        'profile': profile,
+        'campaigns': campaigns
+    }
+
+    return render(request, 'myapp/dashboard.html', context)
+
+>>>>>>> origin/main
 
 
 
@@ -153,6 +173,7 @@ def org_login(request):
 
 @login_required
 def orgdashboard(request):
+<<<<<<< HEAD
      
         # Retrieve all campaigns to list in the organization dashboard
     campaigns = Campaign.objects.all()  # Modify to filter based on organization, if needed
@@ -160,15 +181,34 @@ def orgdashboard(request):
     return render(request, 'myapp/organization_dashboard.html', {'campaigns': campaigns})
     
     # Redirect if the user is not an organization
+=======
+    return render(request, 'myapp/organization_dashboard.html')
+
+
+>>>>>>> origin/main
 
 
 
 def index(request):
     # Retrieve all campaigns from the database
     campaigns = Campaign.objects.all()
+<<<<<<< HEAD
+=======
 
     # Pass the campaigns to the index.html template
     return render(request, 'myapp/index.html', {'campaigns': campaigns})
+>>>>>>> origin/main
+
+    # Pass the campaigns to the index.html template
+    return render(request, 'myapp/index.html', {'campaigns': campaigns})
+
+from django.shortcuts import render, get_object_or_404
+from .models import Campaign
+
+def campaign_detail(request, id):
+    campaign = get_object_or_404(Campaign, id=id)
+    return render(request, 'myapp/campaign_detail.html', {'campaign': campaign})
+
 
 
 def campaign_detail(request, id):
@@ -210,6 +250,10 @@ def logoutt(request):
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 @login_required  
 def reset_password(request):
     if request.method == "POST":

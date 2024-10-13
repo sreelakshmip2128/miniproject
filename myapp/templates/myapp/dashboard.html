@@ -106,23 +106,29 @@
     </div><!-- End Page Title -->
 
    
-
-
-
-
-
-
-    <!-- Service Details Section -->
+  <!-- Service Details Section -->
     <section id="service-details" class="service-details section">
       <div class="container">
 
         <div class="row">
+<<<<<<< HEAD
          
 
   
 
          
                 
+=======
+         <div>
+                    {% if profile %}
+                        <p>Profile: {{ profile }}</p>
+                    {% else %}
+                        <p>No profile found. Please complete your profile.</p>
+                    {% endif %}
+                
+                    <!-- Display campaigns if they exist -->
+</div>
+>>>>>>> origin/main
                 </div><section id="services" class="services section">
 
                     <!-- Section Title -->
@@ -162,6 +168,7 @@
                             {% else %}
                                 <p>You have not created any campaigns.</p>
                             {% endif %}
+<<<<<<< HEAD
                         </div>
                         
                         
@@ -169,6 +176,90 @@
     
 
   </main><!-- End #main -->
+=======
+                        </div>
+                        
+                        
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                          <div class="service-item position-relative">
+                            <div class="icon">
+                              <i class="bi bi-calendar4-week" style="color: #fd7e14;"></i>
+                            </div>
+                            <a href="{% url 'campaign2' %}" class="stretched-link">
+                              <h3>GreenTech: Revolutionizing Sustainability with Cutting-Edge Technology</h3>
+                            </a>
+                            <p>Welcome to GreenTech, where innovation meets sustainability. We’re developing advanced, eco-friendly technology that reduces waste and energy consumption while promoting a healthier planet. Our flagship product, the EcoSmart Device, integrates seamlessly into everyday life, helping users minimize their carbon footprint. With your support, we can accelerate production, enhance our technology, and bring our vision of a greener future to life. Be part of the solution—invest in GreenTech today.</p>
+                          </div>
+                        </div><!-- End Service Item -->
+              
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                          <div class="service-item position-relative">
+                            <div class="icon">
+                              <i class="bi bi-chat-text" style="color: #20c997;"></i>
+                            </div>
+                            <a href="{% url 'campaign2' %}" class="stretched-link">
+                              <h3>Rebuilding Lives: Support Hurricane Relief Efforts</h3>
+                            </a>
+                            <p> In the wake of the recent hurricane, countless families are left without homes, food, and basic necessities. Our disaster relief fund is dedicated to providing immediate assistance and long-term support for affected communities. Your donation will help supply emergency aid, rebuild homes, and offer psychological support to those impacted. Stand with us in the face of adversity and help rebuild lives from the ground up..</p>
+                          </div>
+                        </div><!-- End Service Item -->
+              
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                          <div class="service-item position-relative">
+                            <div class="icon">
+                              <i class="bi bi-credit-card-2-front" style="color: #df1529;"></i>
+                            </div>
+                            <a href="{% url 'campaign2' %}" class="stretched-link">
+                              <h3>Community Garden Initiative</h3>
+                            </a>
+                            <p> Our neighborhood is in need of a green oasis where everyone can connect with nature, learn about sustainable practices, and enjoy fresh produce. The "Grow Together" community garden aims to transform a vacant lot into a thriving garden space. Your donation will help us purchase soil, seeds, tools, and educational materials for local workshops. Additionally, funds will go towards building raised garden beds and installing water-saving irrigation systems. Help us cultivate a space where our community can flourish together.</p>
+                          </div>
+                        </div><!-- End Service Item -->
+              
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                          <div class="service-item position-relative">
+                            <div class="icon">
+                              <i class="bi bi-globe" style="color: #6610f2;"></i>
+                            </div>
+                            <a href="{% url 'campaign2' %}" class="stretched-link">
+                              <h3>Medical Supplies for Rural Clinics</h3>
+                            </a>
+                            <p> Access to basic medical supplies can mean the difference between life and death in rural areas. Our campaign seeks to deliver critical medical supplies—including antibiotics, vaccines, and diagnostic tools—to clinics serving remote communities. These clinics are often under-resourced but provide essential care to those who need it most. Your donation will directly support the procurement and distribution of these vital supplies, ensuring that healthcare professionals have the tools they need to save lives.</p>
+                          </div>
+                        </div><!-- End Service Item -->
+              
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                          <div class="service-item position-relative">
+                            <div class="icon">
+                              <i class="bi bi-clock" style="color: #f3268c;"></i>
+                            </div>
+                            <a href="{% url 'campaign2' %}" class="stretched-link">
+                              <h3>Smart Home Energy Management System</h3>
+                            </a>
+                            <p>Introducing EcoHome, an innovative smart home energy management system designed to optimize energy use and reduce utility bills. Our system uses real-time data and machine learning to adjust lighting, heating, and cooling based on user behavior and environmental conditions. By investing in EcoHome, you help us finalize product development, conduct field tests, and launch a user-friendly app interface. Join us in making homes smarter and more sustainable.</p>
+                          </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                          <h2>More more details check videos </h2>
+                          <p>
+                              <a href="https://www.youtube.com/watch?v=8CifN2yqdg4" target="_blank">
+                                  Watch on YouTube
+                              </a>
+                          </p>
+                      </div>
+
+                       
+                    <!-- End Service Item -->
+
+                </div>
+        
+              </div>
+        
+            </section><!-- /Services Section --><!-- End Service Item -->
+        
+    </main><!-- End #main -->
+>>>>>>> origin/main
 
   <footer id="footer" class="footer">
     <div class="container">

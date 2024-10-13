@@ -14,6 +14,7 @@ urlpatterns = [
     path('orgreg/', views.org_reg, name='orgreg'),
     path('orgdashboard/', views.orgdashboard, name='orgdashboard'),
     path('profile/', views.profile, name='profile'),
+<<<<<<< HEAD
     path('create_campaign/', views.create_campaign, name='create_campaign'),
     path('campaign/<int:id>/', views.campaign_detail, name='campaign_detail'),
     path('logout/',views.logoutt, name='logout'),
@@ -21,16 +22,35 @@ urlpatterns = [
     path('delete/<int:campaign_id>/', views.delete_campaign, name='delete_campaign'),
     path('donate/', views.donate, name='donate'),  # Donation page
     path('payment/callback/', views.payment_callback, name='payment_callback'),
+=======
+    path('campaign/<int:id>/', views.campaign_detail, name='campaign_detail'),
+
+>>>>>>> origin/main
     
 
 
     path('reset_password/', reset_password, name='reset_password'),
+<<<<<<< HEAD
     path('campaign2/', views.campaign2, name='campaign2'),
     path('service-details/', views.service_details, name='service_details'),
     path('portfolio-details/', views.portfolio_details, name='portfolio_details'),
     path('starter-page/', views.starter_page, name='starter_page'),
     path('password_reset_info/', views.ForgotPasswordView.as_view(), name='password_reset_info'),
     path('password_reset_infoo/', views.ForgotPasswordView.as_view(), name='password_reset_infoo'),
+=======
+    
+    
+      
+    
+    path('orgreg/', views.org_reg, name='orgreg'),
+    path('orglogin/', views.org_login, name='orglogin'),
+    path('orgdashboard/', views.orgdashboard, name='orgdashboard'),
+
+
+    path('create_campaign/', views.create_campaign, name='create_campaign'),
+
+    path('logout/',views.logoutt, name='logout'),
+>>>>>>> origin/main
 
 ]
 if settings.DEBUG:

@@ -25,11 +25,18 @@ class Campaign(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     goal_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount_raised = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # New field to track raised amount
     created_at = models.DateTimeField(auto_now_add=True)
+<<<<<<< HEAD
     user = models.ForeignKey(User, on_delete=models.CASCADE)  
     verified = models.BooleanField(default=False) 
     image = models.ImageField(upload_to='campaign_images/', null=True, blank=True)  # Use ForeignKey for a many-to-one relationship
 
+=======
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='campaign_images/', blank=True, null=True)
+    
+>>>>>>> origin/main
     def __str__(self):
         return self.title
     
